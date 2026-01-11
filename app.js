@@ -80,3 +80,52 @@ function renderEvents() {
         eventsContainer.appendChild(card);
     });
 }
+
+// PDF Download
+const downloadPdfBtn = document.getElementById("downloadPdfBtn");
+
+downloadPdfBtn.addEventListener("click", () => {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    const userData = JSON.parse(localStorage.getItem(currentUser));
+    if(!userData || userData.length === 0) return alert("No data to export!");
+
+    let y = 10;
+    doc.setFontSize(16);
+    doc.text("Trip Up Cumilla - Guest List", 10, y);
+    y += 10;
+
+    userData.forEach((data, index) => {
+        doc.setFontSize(12);
+        doc.text(`Event: ${data.eventName}`, 10, y); y += 6;
+        doc.text(`Host: ${data.hostName}`, 10, y); y += 6;
+        doc.text(`Guest: ${data.guestName}`, 10, y); y += 6;
+        doc.text(`Mobile: ${data.guestMobile}`, 10, y); y += 6;
+        doc.text(`Seat: ${data.seatNumber}`, 10, y); y += 6;
+        doc.text(`Amount Paid: ${data.amountPaid}`, 10, y); y += 8;
+        if(y > 270){ doc.addPage(); y = 10; }
+    });
+
+    doc.save("TripUpCumilla_GuestList.pdf");
+});
+
+// Monthly / Yearly Statement
+function generateStatement(month=null, year=null){
+    const userData = JSON.parse(localStorage.getItem(currentUser));
+    if(!userData) return [];
+
+    // Filter by month & year if provided
+    let filtered = userData;
+    if(month !== null || year !== null){
+        filtered = userData.filter(data => {
+            const eventDate = new Date(data.eventDate || new Date()); // যদি eventDate যুক্ত করা থাকে
+            return (month === null || eventDate.getMonth()+1 === month) &&
+                   (year === null || eventDate.getFullYear() === year);
+        });
+    }
+
+    let totalIncome = filtered.reduce((sum,d)=>sum+d.amountPaid,0);
+    alert(`Total Income: ${totalIncome}\nTotal Events: ${filtered.length}`);
+    return filtered;
+}
