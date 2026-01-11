@@ -1,1 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trip Up Cumilla</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">TUC</div>
+        <div class="login-section">
+            <input type="text" id="username" placeholder="Mobile or Gmail">
+            <button id="loginBtn">Login/Register</button>
+        </div>
+    </header>
 
+    <main>
+        <section id="dashboard" class="hidden">
+            <h1>Trip Events</h1>
+            <button id="addEventBtn">Add New Event</button>
+            <div id="eventsContainer"></div>
+        </section>
+
+        <section id="eventFormSection" class="hidden">
+            <h2>Add Guest Info</h2>
+            <form id="eventForm">
+                <input type="text" id="eventName" placeholder="Event Name" required>
+                <input type="text" id="hostName" placeholder="Host Name" required>
+                <input type="text" id="guestName" placeholder="Guest Name" required>
+                <input type="text" id="guestMobile" placeholder="Guest Mobile" required>
+                <input type="text" id="seatNumber" placeholder="Seat Number" required>
+                <input type="number" id="amountPaid" placeholder="Amount Paid" required>
+                <button type="submit">Add Guest</button>
+                <button type="button" id="backBtn">Back</button>
+            </form>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
