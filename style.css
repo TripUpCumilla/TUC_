@@ -807,6 +807,91 @@ h5.bottom {
     background: rgba(0, 0, 0, 0.4);
     min-height: 190px;
 }
+/*-- /extarnal edit --*/
+
+/* Team Member Section */
+.team-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 30px;
+    padding: 50px 20px;
+    background: #f6f6f6;
+}
+
+.team-member {
+    flex: 1 1 250px; /* grow, shrink, base width */
+    max-width: 300px;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.team-member:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.team-member img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.team-member h4 {
+    font-size: 20px;
+    color: #333;
+    margin: 15px 0 5px 0;
+}
+
+.team-member p {
+    font-size: 16px;
+    color: #777;
+    margin-bottom: 15px;
+}
+
+.team-member .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding-bottom: 15px;
+}
+
+.team-member .social-links a {
+    display: inline-block;
+    color: #555;
+    font-size: 18px;
+    transition: 0.3s;
+}
+
+.team-member .social-links a:hover {
+    color: #f4b200;
+}
+
+/* Desktop Specific */
+@media (min-width: 1200px) {
+    .team-section {
+        justify-content: flex-start;
+    }
+}
+
+/* Tablet / Laptop */
+@media (max-width: 991px) {
+    .team-member {
+        flex: 1 1 45%;
+    }
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+    .team-member {
+        flex: 1 1 100%;
+    }
+}
+/*-- //close extarnal --*/
 /*-- //about bottom --*/
 
 
@@ -1922,6 +2007,7 @@ body {
 .hidden {
   display: none;
 }
+
 
 
 
