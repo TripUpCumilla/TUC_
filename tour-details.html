@@ -1,1 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Tour Details</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+<h2>Tour Details</h2>
+
+<input id="guestName" placeholder="Guest Name">
+<input id="phone" placeholder="Phone">
+<input id="seat" placeholder="Seat No">
+<input id="amount" placeholder="Paid Amount">
+
+<button onclick="addGuest()">Add Guest</button>
+<button onclick="downloadPDF()">Download PDF</button>
+
+<div id="guestList"></div>
+
+<script type="module">
+import { db } from "./firebase.js";
+import { collection, addDoc, getDocs } 
+from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const tourId = localStorage.getItem("tourId");
+
+window.addGuest = async () => {
+  await addDoc(collection(db, "guests"), {
+    tourId,
+    name: guestName.value,
+    phone: phone.value,
+    seat: seat.value,
+    amount: amount.value
+  });
+
+  alert("Guest Added!");
+  loadGuests();
+};
+
+async function loadGuests() {
+  const snap = await getDocs(collection(db, "guests"));
+  guestList.innerHTML = "";
+
+  snap.forEach(doc => {
+    let g = doc.data();
+    if(g.tourId === tourId){
+      guestList.innerHTML += `
+        <div class="card">
+          <h3>${g.name}</h3>
+          <p>${g.phone}</p>
+          <p>Seat: ${g.seat}</p>
+          <p>Paid: ${g.amount}</p>
+        </div>
+      `;
+    }
+  });
+}
+
+loadGuests();
+
+window.downloadPDF = () => {
+  window.print(); // simple PDF
+};
+</script>
+
+</body>
+</html>
