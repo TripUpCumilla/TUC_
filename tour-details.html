@@ -24,6 +24,11 @@ import { collection, addDoc, getDocs }
 from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 const tourId = localStorage.getItem("tourId");
+ await addDoc(collection(db, "tours"), {
+  name: name.value,
+  budget: budget.value,
+  createdAt: new Date()
+});
 
 window.addGuest = async () => {
   await addDoc(collection(db, "guests"), {
@@ -64,5 +69,6 @@ window.downloadPDF = () => {
 };
 </script>
 
+  
 </body>
 </html>
