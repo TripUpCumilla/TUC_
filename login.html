@@ -1,1 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>TUC Login</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+<div class="login-box">
+  <h2>TUC Login</h2>
+
+  <input type="email" id="email" placeholder="Email">
+  <input type="password" id="password" placeholder="Password">
+
+  <button onclick="register()">Register</button>
+  <button onclick="login()">Login</button>
+</div>
+
+<script type="module">
+import { auth } from "./firebase.js";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } 
+from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+window.register = function() {
+  const email = email.value;
+  const pass = password.value;
+
+  createUserWithEmailAndPassword(auth, email, pass)
+    .then(() => alert("Account Created"))
+    .catch(e => alert(e.message));
+}
+
+window.login = function() {
+  signInWithEmailAndPassword(auth, email.value, password.value)
+    .then(() => window.location.href="dashboard.html")
+    .catch(e => alert(e.message));
+}
+</script>
+
+</body>
+</html>
