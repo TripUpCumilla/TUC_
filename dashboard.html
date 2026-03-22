@@ -38,6 +38,11 @@ onAuthStateChanged(auth, async(user) => {
 window.logout = () => {
   signOut(auth).then(()=>location.href="login.html");
 }
+
+  window.openTour = (id) => {
+  localStorage.setItem("tourId", id);
+  window.location.href = "tour-details.html";
+}
 </script>
 
 </body>
