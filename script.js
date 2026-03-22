@@ -64,3 +64,9 @@ function sendToWhatsApp(event) {
     window.open(url, "_blank");
 }
 </script>
+<script>
+window.openTour = (id) => {
+  localStorage.setItem("tourId", id);
+  window.location.href = "tour-details.html";
+}
+  </script>
